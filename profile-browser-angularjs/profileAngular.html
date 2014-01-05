@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Profile Browser</title>
+		<link rel="stylesheet" type="text/css" href="css/core.css">
+		<script type="text/javascript" src="scripts/data.js"></script>
+		<script>
+			data.sort(function(a, b) {
+				if(a.firstName < b.firstName) return -1;
+				if(a.firstName > b.firstName) return 1;
+				return 0;
+			});
+		</script>
+	</head>
+	<body ng-app="myApp" ng-controller="SwitchScreenCtrl">
+		<h1>Profile Browser</h1>
+		<div id="main-content">
+			<div data-pb-tabs id="tabs" ng-show="layout == 'tabs'">
+				<ul>
+					<li ng-repeat="p in profile" >
+						<a href="#tab{{p.id}}" >{{p.firstName}} {{p.lastName}}</a>
+					</li>
+				</ul>
+				<div id="tab{{p.id}}" class="profile-content" ng-repeat="p in profile">
+					<div class="sqrImg"><img src="{{p.picture}}" alt="{{p.firstName}} {{p.lastName}}" title="{{p.firstName}} {{p.lastName}}"/></div>
+					<h2>{{p.firstName}} {{p.lastName}}</h2>
+					<p>{{p.bio}}</p>
+				</div>
+			</div>
+			<div data-pb-accr id="accordion" ng-show="layout == 'accr'">
+				<span ng-repeat="p in profile">
+					<div class="accord-header" name="#acc{{p.id}}">{{p.firstName}} {{p.lastName}}</div>
+					<div id="acc{{p.id}}" class="accord-content">
+						<div class="sqrImg"><img src="{{p.picture}}" alt="{{p.firstName}} {{p.lastName}}" title="{{p.firstName}} {{p.lastName}}"/></div>
+						<p>{{p.bio}}</p>
+					</div>
+				</span>
+			</div>
+		</div>
+		<span class="respCheck"></span>
+		<script type="text/javascript" src="scripts/jquery-1.10.2.min.js"></script>
+		<script src="scripts/angular.min.js"></script>
+		<script src="scripts/core.js"></script>
+	</body>
+</html>
